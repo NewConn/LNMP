@@ -1,0 +1,64 @@
+﻿1、configure: error: No curses/termcap library found
+网上有的说法是：–with-named-curses-libs=/usr/lib/libncursesw.so.5
+其实是不对的，虽然能解决configure的错误，但是make的时候会提示错误，正确的做法应该是
+centos: yum -y install ncurses-devel
+debian: apt-get install libncurses5-dev
+2、configure: error: xml2-config not found. Please check your libxml2 installation.
+centos: yum -y install libxml2 libxml2-devel
+debian: apt-get install libxml2-dev
+3、configure: error: Cannot find OpenSSL’s
+centos: yum -y install openssl-devel
+4、configure: error: libjpeg.(a|so) not found
+centos: yum -y install gd
+centos: yum -y install gd-devel
+debian: apt-get install libjpeg-dev
+5、configure: error: libpng.(a|so) not found.
+apt-get install libpng12-dev
+6、configure: error: cannot find output from lex; giving up
+yum -y install flex
+7、configure: error: mod_deflate has been requested but can not be built due to prerequisite failures
+centos: yum -y install zlib-devel openssl-devel
+debian: apt-get install zlib1g-dev
+8、configure: error: libxpm.(a|so) not found.
+centos: yum -y install libxpm-dev
+debian: apt-get install libxpm-dev
+9、configure: error: freetype.h not found.
+centos: yum install freetype-devel
+debian: apt-get install libfreetype6-dev
+10、configure: error: …No recognized SSL/TLS toolkit detected
+centos: yum -y install libssl-dev
+debian: apt-get install libssl-dev
+11、Configure: error: Please reinstall the BZip2 distribution
+centos: yum install bzip2 bzip2-devel
+debian: apt-get install bzip2-devel
+12、Configure: error: Please reinstall the libcurl distribution – easy.h should be in /include/curl/
+centos: yum install curl curl-devel (For Redhat & Fedora)
+# install libcurl4-gnutls-dev (For Ubuntu)
+13、Configure: error: Unable to locate gmp.h
+centos: yum install gmp-devel
+14、Configure: error: Cannot find MySQL header files under /usr. Note that the MySQL client library is not bundled anymore!
+yum install mysql-devel (For Redhat & Fedora)
+# apt-get install libmysql++-dev (For Ubuntu)
+15、Configure: error: Please reinstall the ncurses distribution
+Solutions :
+centos: yum install ncurses ncurses-devel
+16、Checking for unixODBC support… configure: error: ODBC header file ‘/usr/include/sqlext.h’ not found!
+Solutions :
+centos: yum install unixODBC-devel
+17、Configure: error: Cannot find pspell
+Solutions :
+centos: yum install pspell-devel
+18、configure: error: mcrypt.h not found. Please reinstall libmcrypt.
+Solutions :
+yum install libmcrypt libmcrypt-devel (For Redhat & Fedora)
+# apt-get install libmcrypt-dev
+19、Configure: error: snmp.h not found. Check your SNMP installation.
+Solutions :
+yum install net-snmp net-snmp-devel
+20、开启LDAP服务还需要
+yum -y install openldap-devel openldap-servers openldap-clients
+21、configure: error: cannot find output from lex; giving up
+centos: yum -y install flex
+22、configure: error: mod_deflate has been requested but can not be built due to prerequisite failures
+centos: yum -y install zlib-devel openssl-devel
+debian: apt-get install zlib1g-dev

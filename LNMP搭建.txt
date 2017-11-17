@@ -136,6 +136,31 @@ mysql     54778  54702  0 15:59 pts/1    00:00:00 /data/mysql/bin/mysqld
 # ps -aux | grep mysql
 #
 
+启动MySQL
+     创建mysqld
+
+     support-files目录下有一个mysql.server，可以通过该文件启动MySQL服务器./support-files/mysql.server start。更常用的是将MySQL配置为系统服务，       首先将其复制到/etc/init.d/目录并重命名为mysqld：
+
+     $ cp support-files/mysql.server /etc/init.d/mysqld
+     添加开机启动服务
+
+     使用chkconfig将mysqld添加为开机自启动服务：
+
+     $ chkconfig --add mysqld
+     检查添加是否成功：
+
+     $ chkconfig --list mysqld
+     mysqld         	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:启用	6:关闭
+     启动MySQL服务器
+
+     添加为系统服务后，就可以通过service命令来启动MySQL服务器：
+
+     $ service mysqld start
+     检查启动是否成功：
+
+     $ netstat -anp|grep mysqld
+     tcp        0      0 0.0.0.0:3306                0.0.0.0:*                   LISTEN      17307/mysqld        
+     unix  2      [ ACC ]     STREAM     LISTENING     831113 17307/mysqld        /tmp/mysql.sock
 
 PHP编译安装
 #

@@ -1,0 +1,55 @@
+############################# nginx ############################
+[Unit]
+Description=nginx
+After=network.target
+  
+[Service]
+User=www
+Group=www
+Type=forking
+ExecStart=/data/nginx/sbin/nginx
+ExecReload=/data/nginx/sbin/nginx -s reload
+ExecStop=/data/nginx/sbin/nginx -s quit
+PrivateTmp=true
+  
+[Install]
+WantedBy=multi-user.target
+
+
+############################# php-fpm ############################
+[Unit]
+Description=The PHP FastCGI Process Manager
+After=syslog.target network.target
+
+[Service]
+Type=simple
+PIDFile=/data/php/run/php-fpm.pid
+ExecStart=/data/php/sbin/php-fpm --nodaemonize --fpm-config /data/php/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+ExecStop=/bin/kill -SIGINT $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+############################# MySQL Server ############################
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=mysql
+Group=mysql
+PIDFile=/data/mysql/run/data/mysql.pid
+TimeoutSec=0
+PermissionsStartOnly=true
+ExecStart=/data/mysql/bin/mysqld --daemonize --pid-file=/data/mysql/run/mysql.pid
+LimitNOFILE = 5000
+Restart=on-failure
+RestartPreventExitStatus=1
+PrivateTmp=false

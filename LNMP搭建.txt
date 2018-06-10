@@ -21,7 +21,7 @@ MySQL编译安装
 # 
 [mysql 8.0之后依赖boost解决方案]
 下载mysql-boost-8.0.11.tar.gz
-cmake时加上[-DWITH_BOOST=./boost/boost_1_66_0], 无需编译boost
+cmake时加上[-DWITH_BOOST=./boost/], 无需编译boost
 #
 注意：在启动MySQL服务时，会按照一定次序搜索my.cnf，先在/etc目录下找，找不到则会搜索"$basedir/my.cnf"，在本例中就是 /data/mysql/my.cnf，这是新版MySQL的配置文件的默认位置！
 注意：在CentOS 6.4版操作系统的最小安装完成后，在/etc目录下会存在一个my.cnf，需要将此文件更名为其他的名字，如：/etc/my.cnf.bak，否则，该文件会干扰源码安装的MySQL的正确配置，造成无法启动。

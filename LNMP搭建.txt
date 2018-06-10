@@ -2,6 +2,7 @@
 编译环境我安装了以下三个
 yum install gcc gcc-c++ autoconf openssl openssl-devel zlib zlib-devel libxml2 libxml2-devel pcre-deve libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers gdbm-devel libXpm-devel libmcrypt libmcrypt-devel libxslt-devel* perl-ExtUtils-Embed
 最后的pcre centos7中应该默认是安装了一个，devel是pcre的开发包，我们需要的是这个包，如果没有安装-devel的包，编译的时候一样会提示没有安装pcre。
+[error: perl module ExtUtils::Embed is required] --> [yum install perl-ExtUtils-Embed]
 
 MySQL编译安装
 # rpm -qa | grep mysql   #是否安装了mysql
@@ -18,6 +19,10 @@ MySQL编译安装
 # cmake . -DCMAKE_INSTALL_PREFIX=/data/mysql -DMYSQL_UNIX_ADDR=/data/mysql/run/mysql.sock  -DDEFAULT_CHARSET=utf8  -DDEFAULT_COLLATION=utf8_general_ci  -DWITH_INNOBASE_STORAGE_ENGINE=1  -DWITH_READLINE=1  -DENABLED_LOCAL_INFILE=1  -DMYSQL_DATADIR=/data/mysql/data  -DMYSQL_USER=mysql  -DMYSQL_TCP_PORT=3306  -DWITH_EXTRA_CHARSETS=all
 # make && make install && make clean
 # 
+[mysql 8.0之后依赖boost解决方案]
+下载mysql-boost-8.0.11.tar.gz
+cmake时加上[-DWITH_BOOST=./boost/boost_1_66_0], 无需编译boost
+#
 注意：在启动MySQL服务时，会按照一定次序搜索my.cnf，先在/etc目录下找，找不到则会搜索"$basedir/my.cnf"，在本例中就是 /data/mysql/my.cnf，这是新版MySQL的配置文件的默认位置！
 注意：在CentOS 6.4版操作系统的最小安装完成后，在/etc目录下会存在一个my.cnf，需要将此文件更名为其他的名字，如：/etc/my.cnf.bak，否则，该文件会干扰源码安装的MySQL的正确配置，造成无法启动。
 注意：在使用"yum update"更新系统后，需要检查下/etc目录下是否会多出一个my.cnf，如果多出，将它重命名成别的。否则，MySQL将使用这个配置文件启动，可能造成无法正常启动等问题。

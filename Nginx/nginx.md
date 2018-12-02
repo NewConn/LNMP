@@ -17,6 +17,7 @@ make && make install && make clean
 # 配置Nginx
 
 ### 添加用户及用户组
+##### 如果在安装php时已经添加过,忽略这一步
 groupadd -g 80 www
 useradd www -u 80 -g 80 -d /nonexistent -s /sbin/nologin
 

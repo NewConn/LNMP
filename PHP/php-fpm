@@ -1,0 +1,3 @@
+##################   php-fpm  ################
+php_fpm_PID=${prefix}/run/php-fpm.pid
+##################   php-fpm  end   ################

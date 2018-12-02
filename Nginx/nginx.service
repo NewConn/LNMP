@@ -1,0 +1,15 @@
+[Unit]
+Description=nginx
+After=network.target
+  
+[Service]
+User=www
+Group=www
+Type=forking
+ExecStart=/data/nginx/sbin/nginx
+ExecReload=/data/nginx/sbin/nginx -s reload
+ExecStop=/data/nginx/sbin/nginx -s quit
+PrivateTmp=true
+  
+[Install]
+WantedBy=multi-user.target

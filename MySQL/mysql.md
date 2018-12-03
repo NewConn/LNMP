@@ -24,9 +24,9 @@ tar xvf mysql-5.6.29.tar.gz
 cd mysql-5.6.29
 
 ### 配置安装参数
-cmake . -DCMAKE_INSTALL_PREFIX=/data/mysql -DMYSQL_UNIX_ADDR=/data/mysql/run/mysql.sock  -DDEFAULT_CHARSET=utf8  -DDEFAULT_COLLATION=utf8_general_ci  -DWITH_INNOBASE_STORAGE_ENGINE=1  -DWITH_READLINE=1  -DENABLED_LOCAL_INFILE=1  -DMYSQL_DATADIR=/data/mysql/data  -DMYSQL_USER=mysql  -DMYSQL_TCP_PORT=3306  -DWITH_EXTRA_CHARSETS=all
+cmake . -DCMAKE_INSTALL_PREFIX=/data/mysql -DMYSQL_UNIX_ADDR=/data/mysql/run/mysql.sock  -DDEFAULT_CHARSET=utf8  -DDEFAULT_COLLATION=utf8mb4_general_ci  -DWITH_INNOBASE_STORAGE_ENGINE=1  -DWITH_READLINE=1  -DENABLED_LOCAL_INFILE=1  -DMYSQL_DATADIR=/data/mysql/data  -DMYSQL_USER=mysql  -DMYSQL_TCP_PORT=3306  -DWITH_EXTRA_CHARSETS=all
 ###安装MySQL
-make && make install && make clean
+make && make install
 
 ### mysql 8.0之后依赖boost解决方案
 下载mysql-boost源码并解压, cmake时加上 * -DWITH_BOOST=./boost/ * , 无需编译boost
@@ -43,15 +43,14 @@ mkdir /log/mysql/
 mkdir /data/mysql/run
 chown -R mysql:mysql /data/mysql/
 
-### 初始化MySQL, 输入密码的时候，直接回车
-/data/mysql/scripts/mysql_install_db --user=mysql --basedir=/data/mysql --datadir=/data/mysql/data & 
+### 初始化MySQL，记住命令行自动生成的密码
+/data/mysql/bin/mysqld --initialize --user=mysql --basedir=/data/mysql --datadir=/data/mysql/data
 /data/mysql/bin/mysqld_safe &
 
 ### 设置MySQL密码
 /data/mysql/bin/mysql -uroot -p
-mysql> use mysql;
-mysql> UPDATE `user` SET `Password`=PASSWORD('123456') WHERE `User`='root';
-mysql> flush privileges;
+mysql> set password = 'hello2018';
+// mysql> flush privileges;
 
 ### 查找MySQL的pid
 ps -ef | grep mysql
@@ -60,7 +59,7 @@ ps -ef | grep mysql
 cat /data/mysql/run/mysql.pid
 * 54778 *
 ### 结束mysql进程
-kill 54778      
+kill 54778
 ps -aux | grep mysql
 
 

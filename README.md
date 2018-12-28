@@ -18,7 +18,7 @@ Linux Nginx MySQL PHP环境搭建
     1.5.  [nginx.service](Nginx/nginx.service)
 
 
-2. [MySQ配置](MySQL/mysql.md)
+2. [MySQL配置](MySQL/mysql.md)
 
     2.1.  [mysql.cnf](MySQL/mysql.cnf)
 
